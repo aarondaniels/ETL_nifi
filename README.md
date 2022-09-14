@@ -36,6 +36,7 @@ There will be two containers for this system:
 Both of these containers will connected via a docker network. 
 
 # Set Up
+This project will follow the following workflow as an example. 
 ## Install NiFi in a Docker container
 1. Create a network for two containers (MySQL and NiFi containers):
 ``` 
@@ -117,4 +118,19 @@ Now, we bring it all together and work within the NiFi platform to create the ET
 2. Select control services in the page that appears. 
 3. Click on the + icon. 
 4. Add a controller service by selecting the `DBCPConnectionPool` option
-5. Configure connection by clicking on gear icon next to the controler. Name it `MySQL` and move to the properties tab. Change the connection URL to the db, `jdbc:mysql://mysqlabel:3306` (note that the path is the name of the container as defined in preceeding steps).
+5. Configure connection by clicking on gear icon next to the controler. Name it `MySQL` and move to the properties tab. Change the connection URL to the db, `jdbc:mysql://mysqlabel:3306` (note that the path is the name of the container as defined in preceeding steps). Next, set the driver class name as `com.mysql.jdbc.Driver`. Next, set the Database Driver Location to the driver location within the Docker container, `/opt/nifi/drivers/mysql-connector-java-8.0.25.jar`. Next, set Database User as `root` and Passowrd as, `MyNewPass`. 
+6. Returning to the Controller within the Controler Services menu, click the lightening bolt (right side of connector) to enable the connection. A menu will appear for Enable Controler Services, change the scope to `Service and referencing components`. Select enable and ensure that all checkmarks appear. Upon returning to the Controller selection, a blue lightening bolt with text saying `Enabled` will appear in the status section of the controller. 
+7. Returning to the main window, begin adding processors. 
+(1) Add `ExecuteSQL`
+(2) Add `LogAttribute`
+Connect both processors and select `Success` in the For Relationships selection
+8. Configure SQL by selecting the ExecuteSQL processor and clicking the gear icon
+(1) Automatically Terminate Relationships: `failure`
+(2) In the Scheduling tab, run every 30 seconds
+(3) In the Properties tab, set Database Connection Pooling Service to `MySQL` (name that was set in preceeding steps)
+(4) Enter query in the SQL select query to `SELECT * FROM education.students`
+9. Start processor by right click on the processor, then Start
+
+# Additional Notes
+1. In addition to pulling data from a database, there are processors for connecting to an excel file and transforming the data into other formats and returning the data as a single file format or into a DB. 
+2. NiFi ETL pipelines can be created within various database containers, including Cassandra, Mongo, and Redis, 
