@@ -58,22 +58,22 @@ Open NiFi in a browser and establish a MySQL controller service (see README for 
 2. Createa  writer: Select teh '+' option again and search for `JsonRecordSetwriter`. Open the configurations and confirm that the screen looks as follows: <br/>
 ![create writer](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img2.png)
 3. Seelct the lightening bold symbol to start up each controller and select "Service Only" under the service and reference components menu
-4. Set up the data pipeline. This will consist of 5 processors flowing in the order specified below: 
+4. Set up the data pipeline. This will consist of 5 processors flowing in the order specified below:<br/> 
 a) `GetFile` processor:<br/>
 ![Get File Configure](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img3.png)
-![Get File Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img4.png)
+![Get File Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img4.png)<br/>
 b) `SplitText` processor:<br/>
 ![Split Text Configure](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img5.png)
-![Split Text Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img6.png)
+![Split Text Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img6.png)<br/>
 c) `ConvertRecord` processor: <br/>
 ![Convert Record Configure](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img7.png)
-![Convert Record Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img8.png)
+![Convert Record Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img8.png)<br/>
 d) `ConvertJSONToSQL` processor:<br/>
 ![JSON Convert Configure](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img9.png)
-![JSON Convert Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img10.png)
+![JSON Convert Details](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img10.png)<br/>
 e) `PutSQL` processor:<br/>
 ![Get File](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img11.png)
-![Get File](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img12.png)
+![Get File](https://github.com/aarondaniels/ETL_nifi/blob/main/images/img12.png)<br/>
 
 With all five processors configured, the connections must be made. There will be a total of 5 connectors. The first four connectors will connect the five processors and the last connector will be a loop connector over the last processor, `PutSQL`, to handle retries. Retries are necessary because databases have settings to assure the data is not being read and written at the same time. If the data table is locked when trying to perform a load, the processor must retry once the lock is removed. 
 a) The connector between the `GetFile` and `SplitText` processors will be a `success` relationship:<br/>
