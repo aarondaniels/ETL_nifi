@@ -23,7 +23,7 @@ Key Components of NiFi Architecture
 | FlowFile | A FlowFile is “original data with meta-information attached to it. It allows you to process not only CSV or other record-based data but also pictures, videos, audio, or any other binary data”.|
 | Process Group | A process group is composed of all of the processors and their related connectors, and it includes the exchange of data that occurs between these entities through the use of ports. |
 | Processor | A processor is “the NiFi component that is responsible for creating, sending, receiving, transforming, routing, splitting, merging, and processing FlowFiles. It is the most important building block available to NiFi users to build their data flows”|
-| Server | As you learned in earlier modules, web servers are network-connected computers that serve or send information to client computers on the network. The NiFi user interface (UI) is hosted on a web server that “hosts NiFi’s HTTP-based commands and API”. |
+| Server | Web servers are network-connected computers that serve or send information to client computers on the network. The NiFi user interface (UI) is hosted on a web server that “hosts NiFi’s HTTP-based commands and API”. |
 
 There are a lot of different components to NiFi architecture. To learn more about the key components of NiFi architecture, reference the [Apache NiFi Overview](https://nifi.apache.org/docs/nifi-docs/html/overview.html).
 
